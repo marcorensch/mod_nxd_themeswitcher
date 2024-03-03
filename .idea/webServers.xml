@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="cd39c187-716a-4587-b9b4-0c947c8c9378" name="Deployment" url="http://localhost">
+        <fileTransfer mountedRoot="$USER_HOME$/Deployment/Joomla/nxd_themeswitcher" accessType="MOUNT" port="0" />
+      </webServer>
+      <webServer id="373dbb50-b8d3-406c-b972-9ec45fe9d056" name="Joomla5" url="http://localhost">
+        <fileTransfer mountedRoot="$PROJECT_DIR$/../Joomla5Docker/htdocs/administrator/modules/mod_nxd_themeswitcher" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>

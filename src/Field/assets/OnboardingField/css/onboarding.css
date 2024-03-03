@@ -1,0 +1,40 @@
+.nxd-onboarding-highlight{
+    border: 2px solid #f00;
+    position: relative;
+}
+
+.nxd-onboarding-tooltip{
+    background-color: #fff;
+    box-shadow: 4px 4px 8px 0 rgba(0,0,0,0.2);
+    color: #000;
+    padding: 10px;
+    position: absolute;
+    z-index: 1000;
+    border-radius: 5px;
+    max-width: 200px;
+}
+
+.nxd-tooltip-position-left{
+    left: -204px;
+    /* vertically center*/
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.nxd-tooltip-position-right{
+    right: -204px;
+    left: auto;
+    /* vertically center*/
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.nxd-tooltip-position-top{
+    top: -80px;
+    min-width: 240px;
+}
+
+.nxd-tooltip-position-bottom{
+    bottom: -80px;
+    min-width: 240px;
+}

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="5.0" client="administrator" method="upgrade">
+    <name>mod_nxd_themeswitcher</name>
+    <creationDate>February 2024</creationDate>
+    <author>NXD | Marco Rensch</author>
+    <authorEmail>support@nx-designs.ch</authorEmail>
+    <authorUrl>https://nx-designs.ch</authorUrl>
+    <copyright>Copyright ©2024 by nx-designs</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <namespace path="src">NXD\Module\ThemeSwitcher</namespace>
+    <version>1.0.0</version>
+    <description><![CDATA[MOD_NXD_THEMESWITCHER_XML_DESCRIPTION]]></description>
+
+    <scriptfile>script.php</scriptfile>
+
+    <files>
+        <folder module="mod_nxd_themeswitcher">services</folder>
+        <folder>language</folder>
+        <folder>src</folder>
+        <folder>sql</folder>
+        <folder>tmpl</folder>
+        <file>script.php</file>
+        <file>helper.php</file>
+    </files>
+
+    <languages>
+        <language tag="en-GB">language/en-GB/mod_nxd_themeswitcher.ini</language>
+        <language tag="en-GB">language/en-GB/mod_nxd_themeswitcher.sys.ini</language>
+    </languages>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/mysql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/mysql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/mysql/updates</schemapath>
+        </schemas>
+    </update>
+
+    <!-- Update servers -->
+    <updateservers>
+        <server type="extension" priority="1" name="mod_nxdthemeswitcher">
+            https://update.nx-designs.ch/joomla/modules/mod_nxdthemeswitcher.xml
+        </server>
+    </updateservers>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic"
+                      addfieldprefix="NXD\Module\ThemeSwitcher\Administrator\Field"
+            >
+                <field name="darkmode_default"
+                       label="MOD_NXD_THEMESWITCHER_DEFAULT_STATE_LABEL"
+                       type="radio"
+                       layout="joomla.form.field.radio.switcher"
+                       default="false"
+                >
+                    <option value="true">MOD_NXD_THEMESWITCHER_DEFAULT_STATE_DARK</option>
+                    <option value="false">MOD_NXD_THEMESWITCHER_DEFAULT_STATE_LIGHT</option>
+                </field>
+
+                <field name="db_store"
+                       label="MOD_NXD_THEMESWITCHER_USE_PERSIST_LABEL"
+                       description="MOD_NXD_THEMESWITCHER_USE_PERSIST_DESC"
+                       type="radio"
+                       filter="integer"
+                       layout="joomla.form.field.radio.switcher"
+                       default="0"
+                >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+
+                <field name="onboarding" type="onboarding" label="" />
+
+            </fieldset>
+            <fieldset name="advanced">
+                <field
+                        name="layout"
+                        type="modulelayout"
+                        label="JFIELD_ALT_LAYOUT_LABEL"
+                        class="form-select"
+                        validate="moduleLayout"
+                />
+            </fieldset>
+        </fields>
+    </config>
+</extension>
