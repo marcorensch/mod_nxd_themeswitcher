@@ -10,10 +10,10 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="Joomla5">
+      <paths name="Joomla5Docker">
         <serverdata>
           <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="administrator/modules/mod_nxd_themeswitcher" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

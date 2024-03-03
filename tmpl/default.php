@@ -23,7 +23,7 @@ $wa->addInlineScript('
     window.jDarkModeDefault = "'.$params->get("darkmode_default", "true").'";
     window.themeSwitcherDbStore = Boolean('.$params->get("db_store", 0).');
 ');
-$wa->registerAndUseScript('nxd-themeswitcher-js', 'administrator/modules/mod_nxdthemeswitcher/tmpl/assets/js/module.js', [], ['defer' => true, 'version' => 'auto'],['core']);
+$wa->registerAndUseScript('nxd-themeswitcher-js', 'administrator/modules/mod_nxd_themeswitcher/tmpl/assets/js/module.js', [], ['defer' => true],['core']);
 ?>
 
 <button type="button" class="header-item-content theme-button" style="border: none;">

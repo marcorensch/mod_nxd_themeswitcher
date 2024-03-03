@@ -1,11 +1,11 @@
-jQuery(document).ready(function($){
+jQuery(document).ready(async function ($) {
 
     // Run script only once
     if (typeof window.jDarkMode !== "undefined") return;
 
     // Initial settings
-    let darkMode = window.jDarkMode = getDarkModeCurrentSetup();
-    setDarkModeState(darkMode);
+    let darkMode = window.jDarkMode = await getDarkModeCurrentSetup();
+    setDarkModeState(darkMode, true);
     // Update the first visible "Dark Mode Switcher" button to avoid flickering
     updateButton(document.querySelector("button.theme-button"), darkMode);
     updateMode(darkMode);
@@ -56,31 +56,55 @@ jQuery(document).ready(function($){
     }
 
     // Sets localStorage state
-    function setDarkModeState(state) {
+    function setDarkModeState(state, calledFromInit = false) {
         localStorage.setItem("jDarkMode", state);
-        if(window.themeSwitcherDbStore) setDarkModeStateInDatabase(state);
+        if (window.themeSwitcherDbStore && calledFromInit) setDarkModeStateInDatabase(state);
     }
 
 
     function setDarkModeStateInDatabase(state) {
         $.ajax({
-            url: 'index.php?option=com_ajax&module=nxd_themeswitcher&method=handleChange&data='+state+'&format=json',
+            url: 'index.php?option=com_ajax&module=nxd_themeswitcher&method=handleChange&data=' + state + '&format=json',
             type: "post",
-            success :function(response){
+            success: function (response) {
                 console.log(response);
             },
-            error: function(error){
+            error: function (error) {
                 console.error(error);
             }
         });
     }
 
+    async function getDarkModeStateFromDatabase() {
+        try {
+            const response = await $.ajax({
+                url: 'index.php?option=com_ajax&module=nxd_themeswitcher&method=getDarkModeState&format=json',
+                type: "get"
+            });
+            return response.data.data;
+        } catch (error) {
+            console.error(error);
+            throw error; // Rethrow the error for the caller to handle
+        }
+    }
+
     // Gets localStorage state
-    function getDarkModeCurrentSetup() {
-        if(localStorage.getItem("jDarkMode") !== null) {
+    async function getDarkModeCurrentSetup() {
+        if (localStorage.getItem("jDarkMode") !== null) {
             return localStorage.getItem("jDarkMode") === "true";
-        }else {
-            return window.jDarkModeDefault === "true";
+        } else {
+            try {
+                const dbResponse = await getDarkModeStateFromDatabase();
+                if (dbResponse === 0 || dbResponse === 1) {
+                    return Boolean(dbResponse);
+                } else {
+                    return window.jDarkModeDefault === "true";
+                }
+            } catch (error) {
+                // Handle error from getDarkModeStateFromDatabase
+                console.error(error);
+                return window.jDarkModeDefault === "true"; // Return default value
+            }
         }
     }
 
@@ -89,8 +113,8 @@ jQuery(document).ready(function($){
     dmsBtns.forEach((dmsBtn) => {
         updateButton(dmsBtn, darkMode);
         // Set eventListeners for all "dark-mode"-toggle-buttons on click and set localStorage
-        dmsBtn.addEventListener("click", () => {
-            let darkMode = window.jDarkMode = getDarkModeCurrentSetup();
+        dmsBtn.addEventListener("click", async () => {
+            let darkMode = window.jDarkMode = await getDarkModeCurrentSetup();
 
             const newState = !darkMode;
             setDarkModeState(newState);
