@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/nxd_themeswitcher.iml" filepath="$PROJECT_DIR$/.idea/nxd_themeswitcher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/mod_nxd_themeswitcher.iml" filepath="$PROJECT_DIR$/.idea/mod_nxd_themeswitcher.iml" />
     </modules>
   </component>
 </project>
