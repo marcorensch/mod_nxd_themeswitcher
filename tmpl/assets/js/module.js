@@ -18,15 +18,6 @@ jQuery(document).ready(async function ($) {
             icon.innerHTML = "🌙";
             icon.style.backgroundColor = "rgb(31, 48, 71)";
             text.innerHTML = "&nbsp;Dark Mode";
-            btn.style.backgroundImage = 'url("https://unsplash.com/de/fotos/sonnenstrahlen-uber-der-silhouette-der-wolken-Ih3-ww0fBHM")';
-            // Background Image size cover
-            btn.style.backgroundSize = "cover";
-            // Background Image position center
-            btn.style.backgroundPosition = "center";
-            // Background Image repeat no-repeat
-            btn.style.backgroundRepeat = "no-repeat";
-            // Background Image attachment fixed
-            btn.style.backgroundAttachment = "fixed";
         } else {
             icon.innerHTML = "☀️";
             icon.style.backgroundColor = "transparent";
